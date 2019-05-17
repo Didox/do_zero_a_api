@@ -1,0 +1,21 @@
+
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: root
+  password:
+
+development:
+  <<: *default
+  database: aula1_development
+
+test:
+  <<: *default
+  database: aula1_test
+
+production:
+  <<: *default
+  database: aula1_production
+  username: aula1
+  password: <%= ENV['PROSPECCAO_DATABASE_PASSWORD'] %>
