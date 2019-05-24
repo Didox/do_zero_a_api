@@ -1,0 +1,46 @@
+<h1>API estados aula</h1>
+
+<a href="http://localhost:3000/estados.json">Estados</a><br>
+<a href="http://localhost:3000/cidades.json">Cidades</a><br>
+<a href="http://localhost:3000/cidades.json?uf=sp">Cidades SP</a><br>
+
+
+<div style="margin-top: 30px">
+  <h5>Estados</h5>
+  <select id="estados" onchange="loadCapitais(this.value)">
+    <option>Selecione</option>
+  </select>
+</div>
+
+<div style="margin-top: 30px">
+  <h5>Cidades</h5>
+  <select id="cidades">
+    <option>Selecione</option>
+  </select>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+  var loadEstados = function(){
+    $.ajax({
+      url: "http://localhost:3000/estados.json"
+    }).done(function(dados) {
+      $("#estados").html("<option>Selecione</option>")
+      $(dados).each(function(){
+        $("#estados").append("<option value='" + this.uf + "'>" + this.nome + "</option>")
+      });
+    });
+  }
+
+  var loadCapitais = function (uf){
+    $.ajax({
+      url: "http://localhost:3000/cidades.json?uf=" + uf
+    }).done(function(dados) {
+      $("#cidades").html("<option>Selecione</option>")
+      $(dados).each(function(){
+        $("#cidades").append("<option value='" + this.uf + "'>" + this.nome + "</option>")
+      });
+    });
+ }
+  loadEstados();
+</script>
