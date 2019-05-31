@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   
   get '/estados', to: 'estados#index'
   get '/cidades', to: 'estados#lista_cidades'
+  get '/estados-proxy', to: 'estados#proxy'
+
 end

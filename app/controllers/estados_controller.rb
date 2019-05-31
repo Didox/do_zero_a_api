@@ -1,5 +1,6 @@
 class EstadosController < ApplicationController
   def index
+    realeaseCrosDomain
     estados = [
       {nome:"São Paulo",uf:"SP"},
       {nome:"Rio de Jneiro",uf:"RJ"},
@@ -14,7 +15,15 @@ class EstadosController < ApplicationController
     render json: estados, status: 200
   end
 
+  def proxy
+    require 'rest-client'
+    estados = RestClient.get("http://localhost:3000/estados.json")
+    render json: estados.body, status: 200
+  end
+
   def lista_cidades
+    realeaseCrosDomain
+
     cidades = [
       {nome:"São Paulo",uf:"SP"},
       {nome:"São Bernardo do campo",uf:"SP"},
@@ -30,6 +39,14 @@ class EstadosController < ApplicationController
     end
     
     render json: cidades, status: 200
+  end
+
+  private
+  def realeaseCrosDomain
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Methods'] = 'POST'
+    headers['Access-Control-Request-Method'] = '*'
+    headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept'
   end
 
 end

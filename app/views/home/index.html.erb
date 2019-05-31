@@ -23,6 +23,7 @@
 <script type="text/javascript">
   var loadEstados = function(){
     $.ajax({
+      // url: "http://api.localhost:3000/estados-proxy.json"
       url: "http://localhost:3000/estados.json"
     }).done(function(dados) {
       $("#estados").html("<option>Selecione</option>")
