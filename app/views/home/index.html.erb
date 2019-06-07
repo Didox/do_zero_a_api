@@ -19,6 +19,32 @@
   </select>
 </div>
 
+
+<h1>Lista de carros</h1>
+<fieldset id="formCarro">
+  <legend>Carro:</legend>
+  Nome: <input type="text" id="nome"><br>
+  Marca: <input type="text" id="marca"><br>
+  Modelo: <input type="text" id="modelo"><br>
+  Ano: <input type="number" id="ano"><br>
+  <button onclick="SalvarFormCarros()">Salvar</button>
+</fieldset>
+
+<table class="table" id="tableCarros">
+  <thead>
+    <tr>
+      <th>nome</th>
+      <th>marca</th>
+      <th>modelo</th>
+      <th>ano</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
   var loadEstados = function(){
@@ -42,6 +68,101 @@
         $("#cidades").append("<option value='" + this.uf + "'>" + this.nome + "</option>")
       });
     });
- }
+  }
+
   loadEstados();
+
+  var loadCarros = function (){
+    $("#tableCarros tbody").html("");
+    $.ajax({
+      url: "http://localhost:3000/carros.json"
+    }).done(function(carros) {
+      $(carros).each(function(){
+        $("#tableCarros tbody").append("<tr data-id='" + this.id + "' ondblclick='alterarLinha(this)' ><td data-nome='nome'>" + this.nome + "</td><td data-nome='marca'>" + this.marca + "</td><td data-nome='modelo'>" + this.modelo + "</td><td data-nome='ano'>" + this.ano + "</td><td data-nome='apagar'><a href=\"javascript:apagar(\'" + this.id + "\')\">Apagar</a></td></tr>")
+      });
+    });
+  }
+
+  loadCarros();
+
+  var alterarLinha = function(self){
+    $(self).find("td").each(function(){
+      var conteudo = $(this).text();
+      if($(this).data("nome") != "apagar"){
+        $(this).html("<input type='text' onblur='salvar(this)' name='" + $(this).data("nome") + "' value='" + conteudo + "'> ");
+      }
+    });
+  }
+
+  var salvar = function(self){
+    var carroId = $(self).parents("tr").data("id")
+    var campo = $(self).attr("name")
+
+    var carro = {}
+    carro[campo] = $(self).val();
+
+    $.ajax({
+      type: 'PUT',
+      url: "http://localhost:3000/carros/" + carroId + ".json",
+      data: {
+        carro: carro
+      }
+    }).done(function(carros) {
+      $(self).parents("td").html($(self).val());
+    }).fail(function() {
+      alert("Erro ao atualizar campo " + campo + " da tabela carros");
+    });
+  }
+
+  var apagar = function(carroId){
+    $.ajax({
+      type: 'DELETE',
+      url: "http://localhost:3000/carros/" + carroId + ".json",
+    }).done(function(carros) {
+      loadCarros();
+    }).fail(function() {
+      alert("Erro ao apagar carro");
+    });
+  }
+
+  var SalvarFormCarros = function(){
+    dados = {
+      carro:{
+        nome: $("#nome").val(),
+        marca: $("#marca").val(),
+        modelo: $("#modelo").val(),
+        ano: $("#ano").val()
+      }
+    }
+    $.post({
+      url: "http://localhost:3000/carros.json",
+      data: dados
+    }).done(function(carros) {
+      $("#nome").val("");
+      $("#marca").val("");
+      $("#modelo").val("");
+      $("#ano").val("");
+      loadCarros();
+    }).fail(function() {
+      alert("Erro ao cadastrar carros");
+    });
+  }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  resources :carros
+  # resources :carros
+
+  get '/carros', to: 'carros#index'
+  post '/carros', to: 'carros#create'
+  get '/carros/:id', to: 'carros#show'
+  put '/carros/:id', to: 'carros#update'
+  delete '/carros/:id', to: 'carros#destroy'
+
 
   root to: "home#index"
   

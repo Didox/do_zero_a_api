@@ -1,6 +1,8 @@
 class CarrosController < ApplicationController
   before_action :set_carro, only: [:show, :edit, :update, :destroy]
 
+  skip_before_action :verify_authenticity_token
+
   # GET /carros
   # GET /carros.json
   def index
@@ -25,12 +27,13 @@ class CarrosController < ApplicationController
   # POST /carros
   # POST /carros.json
   def create
+
     @carro = Carro.new(carro_params)
 
     respond_to do |format|
       if @carro.save
         format.html { redirect_to @carro, notice: 'Carro was successfully created.' }
-        format.json { render :show, status: :created, location: @carro }
+        format.json { render json: {}, status: 201 }
       else
         format.html { render :new }
         format.json { render json: @carro.errors, status: :unprocessable_entity }
@@ -44,7 +47,7 @@ class CarrosController < ApplicationController
     respond_to do |format|
       if @carro.update(carro_params)
         format.html { redirect_to @carro, notice: 'Carro was successfully updated.' }
-        format.json { render :show, status: :ok, location: @carro }
+        format.json { render json: {}, status: 204 }
       else
         format.html { render :edit }
         format.json { render json: @carro.errors, status: :unprocessable_entity }
