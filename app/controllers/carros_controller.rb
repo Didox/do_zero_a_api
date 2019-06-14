@@ -9,6 +9,24 @@ class CarrosController < ApplicationController
     @carros = Carro.all
   end
 
+  def proxy
+    request = RestClient::Request.new(
+      :method => :get,
+      :url => "http://localhost:3001/token-acesso.json"
+    ).execute
+
+    token = JSON.parse(request.body)["token"]
+    token = Base64.encode64(token)
+
+    response = RestClient::Request.new(
+      :method => :get,
+      :url => "http://localhost:3001/carros.json",
+      :headers => { "Authentic-Token" => token, :content_type => :json }
+    ).execute
+
+    render json: JSON.parse(response.body), status: 201
+  end
+
   # GET /carros/1
   # GET /carros/1.json
   def show
