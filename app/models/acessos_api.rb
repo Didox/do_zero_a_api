@@ -1,0 +1,2 @@
+class AcessosApi < ApplicationRecord
+end

@@ -1,0 +1,32 @@
+<%= form_with(model: token, local: true) do |form| %>
+  <% if token.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(token.errors.count, "error") %> prohibited this token from being saved:</h2>
+
+      <ul>
+      <% token.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :valor %>
+    <%= form.text_field :valor %>
+  </div>
+
+  <div class="field">
+    <%= form.label :data_inicial %>
+    <%= form.datetime_select :data_inicial %>
+  </div>
+
+  <div class="field">
+    <%= form.label :data_final %>
+    <%= form.datetime_select :data_final %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

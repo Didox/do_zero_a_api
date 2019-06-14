@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Acessos Apis</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Token</th>
+      <th>Url</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @acessos_apis.each do |acessos_api| %>
+      <tr>
+        <td><%= acessos_api.token %></td>
+        <td><%= acessos_api.url %></td>
+        <td><%= link_to 'Show', acessos_api %></td>
+        <td><%= link_to 'Edit', edit_acessos_api_path(acessos_api) %></td>
+        <td><%= link_to 'Destroy', acessos_api, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Acessos Api', new_acessos_api_path %>

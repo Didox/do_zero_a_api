@@ -1,0 +1,27 @@
+<%= form_with(model: acessos_api, local: true) do |form| %>
+  <% if acessos_api.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(acessos_api.errors.count, "error") %> prohibited this acessos_api from being saved:</h2>
+
+      <ul>
+      <% acessos_api.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :token %>
+    <%= form.text_field :token %>
+  </div>
+
+  <div class="field">
+    <%= form.label :url %>
+    <%= form.text_field :url %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

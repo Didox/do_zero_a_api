@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  valor: MyString
+  data_inicial: 2019-06-13 22:43:03
+  data_final: 2019-06-13 22:43:03
+
+two:
+  valor: MyString
+  data_inicial: 2019-06-13 22:43:03
+  data_final: 2019-06-13 22:43:03
