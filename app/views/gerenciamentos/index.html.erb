@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Gerenciamentos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Versao</th>
+      <th>Descritivo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @gerenciamentos.each do |gerenciamento| %>
+      <tr>
+        <td><%= gerenciamento.nome %></td>
+        <td><%= gerenciamento.versao %></td>
+        <td><%= gerenciamento.descritivo %></td>
+        <td><%= link_to 'Show', gerenciamento %></td>
+        <td><%= link_to 'Edit', edit_gerenciamento_path(gerenciamento) %></td>
+        <td><%= link_to 'Destroy', gerenciamento, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Gerenciamento', new_gerenciamento_path %>

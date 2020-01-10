@@ -1,0 +1,2 @@
+class Gerenciamento < ApplicationRecord
+end

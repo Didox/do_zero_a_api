@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_14_014303) do
+ActiveRecord::Schema.define(version: 2020_01_10_014513) do
 
   create_table "acessos_apis", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "token"
@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(version: 2019_06_14_014303) do
     t.string "marca"
     t.string "modelo"
     t.integer "ano"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "gerenciamentos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "nome"
+    t.string "versao"
+    t.text "descritivo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

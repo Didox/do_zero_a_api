@@ -47,6 +47,29 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+
+  // $.ajax({
+  //   url: "http://api.localhost:3001/produtos.json"
+  // }).done(function(dados) {
+  //   alert(JSON.stringify(dados));
+  // });
+
+
+  
+
+
+  var retorno = function(dados){
+    // alert(JSON.stringify(dados));
+    $(dados).each(function(){
+      alert(this.nome);
+    })
+  }
+
+  var script = document.createElement("script");
+  script.src = "http://api.localhost:3001/produtos/jsonp?callback=retorno"
+  document.body.appendChild(script);
+
+
   var loadEstados = function(){
     $.ajax({
       // url: "http://api.localhost:3000/estados-proxy.json"

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @gerenciamento.nome %>
+</p>
+
+<p>
+  <strong>Versao:</strong>
+  <%= @gerenciamento.versao %>
+</p>
+
+<p>
+  <strong>Descritivo:</strong>
+  <%= @gerenciamento.descritivo %>
+</p>
+
+<%= link_to 'Edit', edit_gerenciamento_path(@gerenciamento) %> |
+<%= link_to 'Back', gerenciamentos_path %>

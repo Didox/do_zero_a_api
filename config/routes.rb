@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/versao', to: 'gerenciamentos#versao'
+  resources :gerenciamentos
   resources :acessos_apis
   resources :tokens
   # resources :carros

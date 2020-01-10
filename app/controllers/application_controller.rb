@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   before_action :valida_token_api
 
   def valida_token_api
+    return
+    
     if request.path_parameters[:format] == 'json'
       if params[:controller] == "carros" && params[:action] == "proxy" || params[:controller] == "tokens" && params[:action] == "token_acesso"
         return

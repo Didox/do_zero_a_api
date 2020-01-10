@@ -1,0 +1,32 @@
+<%= form_with(model: gerenciamento, local: true) do |form| %>
+  <% if gerenciamento.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(gerenciamento.errors.count, "error") %> prohibited this gerenciamento from being saved:</h2>
+
+      <ul>
+      <% gerenciamento.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nome %>
+    <%= form.text_field :nome %>
+  </div>
+
+  <div class="field">
+    <%= form.label :versao %>
+    <%= form.text_field :versao %>
+  </div>
+
+  <div class="field">
+    <%= form.label :descritivo %>
+    <%= form.text_area :descritivo %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
